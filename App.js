@@ -1,5 +1,4 @@
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {StatusBar} from 'react-native';
+import { StatusBar, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 export default function App() {
@@ -30,5 +29,5 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "blue",
-  }
+  },
 });
