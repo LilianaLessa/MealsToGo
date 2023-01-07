@@ -9,6 +9,29 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { restaurantsRequest } from "./src/services/restaurants/restaurants.service";
+
+const SettingsScreen = () => <Text>Settings!</Text>;
+const MapScreen = () => <Text>Map!</Text>;
+
+const Tab = createBottomTabNavigator();
+
+const TAB_ICONS = {
+  Restaurants: "restaurant",
+  Map: "map",
+  Settings: "settings",
+};
+
+const createScreenOptions = ({ route }) => {
+  const iconName = TAB_ICONS[route.name];
+  return {
+    tabBarIcon: ({ size, color }) => (
+      <Ionicons name={iconName} size={size} color={color} />
+    ),
+    tabBarActiveTintColor: "tomato",
+    tabBarInactiveTintColor: "gray",
+  };
+};
 
 export default function App() {
   const [oswaldLoaded] = useFonts({ Oswald_400Regular });
@@ -17,28 +40,6 @@ export default function App() {
   if (!oswaldLoaded || !latoLoaded) {
     return null;
   }
-
-  const SettingsScreen = () => <Text>Settings!</Text>;
-  const MapScreen = () => <Text>Map!</Text>;
-
-  const Tab = createBottomTabNavigator();
-
-  const TAB_ICONS = {
-    Restaurants: "restaurant",
-    Map: "map",
-    Settings: "settings",
-  };
-
-  const createScreenOptions = ({ route }) => {
-    const iconName = TAB_ICONS[route.name];
-    return {
-      tabBarIcon: ({ size, color }) => (
-        <Ionicons name={iconName} size={size} color={color} />
-      ),
-      tabBarActiveTintColor: "tomato",
-      tabBarInactiveTintColor: "gray",
-    };
-  };
 
   return (
     <>
