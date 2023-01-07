@@ -9,8 +9,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { restaurantsRequest } from "./src/services/restaurants/restaurants.service";
-
 const SettingsScreen = () => <Text>Settings!</Text>;
 const MapScreen = () => <Text>Map!</Text>;
 
