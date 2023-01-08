@@ -23,7 +23,7 @@ const Item = styled.View`
 `;
 
 const isAndroid = Platform.OS === "android";
-export const CompactRestaurantInfo = ({ restaurant }) => {
+export const CompactRestaurantInfo = ({ restaurant, isMap }) => {
   const {
     name,
     photos = [
@@ -31,7 +31,7 @@ export const CompactRestaurantInfo = ({ restaurant }) => {
     ],
   } = restaurant;
 
-  const Image = isAndroid ? CompactWebView : CompactImage;
+  const Image = isAndroid && isMap ? CompactWebView : CompactImage;
 
   return (
     <Item>
