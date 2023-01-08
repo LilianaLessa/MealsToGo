@@ -6,6 +6,7 @@ import styled from "styled-components/native";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { Search } from "../components/search.component";
+import { SafeArea } from "../../../components/utility/safe-area.component";
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
@@ -28,10 +29,10 @@ const Loading = styled(ActivityIndicator).attrs({
 `;
 
 export const RestaurantsScreen = () => {
-  const { isLoading, error, restaurants } = useContext(RestaurantsContext);
+  const { isLoading, restaurants } = useContext(RestaurantsContext);
 
   return (
-    <>
+    <SafeArea>
       {isLoading && (
         <LoadingContainer>
           <Loading />
@@ -49,6 +50,6 @@ export const RestaurantsScreen = () => {
         }}
         keyExtractor={(item) => item.name}
       />
-    </>
+    </SafeArea>
   );
 };
