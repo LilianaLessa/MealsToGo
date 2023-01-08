@@ -5,15 +5,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { RestaurantsNavigator } from "./restaurants.navigator";
 import { SafeArea } from "../../components/utility/safe-area.component";
+import { MapScreen } from "../../features/map/screens/map.screen";
 
 const SettingsScreen = () => (
   <SafeArea>
     <Text>Settings!</Text>
-  </SafeArea>
-);
-const MapScreen = () => (
-  <SafeArea>
-    <Text>Map!</Text>
   </SafeArea>
 );
 
