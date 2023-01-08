@@ -3,6 +3,7 @@ import {
   getAuth,
   initializeAuth,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { getReactNativePersistence } from "firebase/auth/react-native";
 import {
@@ -34,3 +35,6 @@ if (!getApps().length) {
 
 export const loginRequest = (email, password) =>
   signInWithEmailAndPassword(getAuth(), email, password);
+
+export const registerRequest = (email, password) =>
+  createUserWithEmailAndPassword(getAuth(), email, password);
