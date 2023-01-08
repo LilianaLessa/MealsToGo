@@ -29,3 +29,7 @@ export const AuthButton = styled(Button).attrs({
 })`
   padding: ${(props) => props.theme.space[2]};
 `;
+
+export const LoginFormContainer = styled.View`
+  width: 250px;
+`;
