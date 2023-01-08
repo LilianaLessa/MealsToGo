@@ -1,8 +1,16 @@
-import { Text, View } from "react-native";
 import React from "react";
+import {
+  AccountScreenBackgroundImage,
+  DemoText,
+  ScreenContainer,
+} from "../components/account.styles";
 
-export const AccountScreen = () => (
-  <View>
-    <Text>Account Screen</Text>
-  </View>
-);
+export const AccountScreen = () => {
+  return (
+    <ScreenContainer>
+      <AccountScreenBackgroundImage>
+        <DemoText>Account Screen</DemoText>
+      </AccountScreenBackgroundImage>
+    </ScreenContainer>
+  );
+};
