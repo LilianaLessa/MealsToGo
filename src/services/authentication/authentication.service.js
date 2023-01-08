@@ -3,8 +3,8 @@ import {
   getAuth,
   initializeAuth,
   signInWithEmailAndPassword,
-  getReactNativePersistence,
 } from "firebase/auth";
+import { getReactNativePersistence } from "firebase/auth/react-native";
 import {
   FIREBASE_API_KEY,
   FIREBASE_AUTH_DOMAIN,
