@@ -1,5 +1,10 @@
 import { getApps, initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  initializeAuth,
+  signInWithEmailAndPassword,
+  getReactNativePersistence,
+} from "firebase/auth";
 import {
   FIREBASE_API_KEY,
   FIREBASE_AUTH_DOMAIN,
@@ -8,6 +13,7 @@ import {
   FIREBASE_MESSAGING_SENDER_ID,
   FIREBASE_APP_ID,
 } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -20,7 +26,10 @@ const firebaseConfig = {
 };
 
 if (!getApps().length) {
-  initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig);
+  initializeAuth(app, {
+    persistence: getReactNativePersistence(AsyncStorage),
+  });
 }
 
 export const loginRequest = (email, password) =>

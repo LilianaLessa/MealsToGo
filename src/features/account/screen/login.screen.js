@@ -1,65 +1,58 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import { Text } from "../../../components/typography/text.component";
 import {
   AccountBackground,
   AccountContainer,
   AccountCover,
   AuthButton,
-  LoginFormContainer,
+  AuthInput,
 } from "../components/account.styles";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 import { Spacer } from "../../../components/spacer/spacer.component";
-import { TextInput } from "react-native-paper";
 
-export const LoginScreen = ({ navigation }) => {
-  const { onLogin, isAuthenticated, error } = useContext(AuthenticationContext);
+export const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    onLogin(email, password);
-  };
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigation.navigate("Restaurants");
-    }
-  }, [isAuthenticated, navigation]);
-
-  useEffect(() => {
-    if (error) {
-      console.log(error);
-    }
-  }, [error]);
+  const { onLogin, error } = useContext(AuthenticationContext);
 
   return (
     <AccountBackground>
       <AccountCover />
       <AccountContainer>
-        <LoginFormContainer>
-          <TextInput
-            label="E-mail"
-            value={email}
-            keyboardType="email-address"
-            onChangeText={(text) => setEmail(text)}
+        <AuthInput
+          label="E-mail"
+          value={email}
+          textContentType="emailAddress"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          onChangeText={(u) => setEmail(u)}
+        />
+        <Spacer position="top" size="large">
+          <AuthInput
+            label="Password"
+            value={password}
+            textContentType="password"
+            secureTextEntry
+            autoCapitalize="none"
+            secure
+            onChangeText={(p) => setPassword(p)}
           />
-          <Spacer position="top" size="large">
-            <TextInput
-              label="Password"
-              value={password}
-              secureTextEntry={true}
-              onChangeText={(text) => setPassword(text)}
-            />
+        </Spacer>
+        {error.message && (
+          <Spacer>
+            <Text variant="error">{error.message}</Text>
           </Spacer>
-          <Spacer position="top" size="large">
-            <AuthButton
-              icon="lock-open-outline"
-              mode="contained"
-              onPress={handleLogin}
-            >
-              Login
-            </AuthButton>
-          </Spacer>
-        </LoginFormContainer>
+        )}
+        <Spacer position="top" size="large">
+          <AuthButton
+            icon="lock-open-outline"
+            mode="contained"
+            onPress={() => onLogin(email, password)}
+          >
+            Login
+          </AuthButton>
+        </Spacer>
       </AccountContainer>
     </AccountBackground>
   );
