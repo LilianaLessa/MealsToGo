@@ -31,10 +31,6 @@ const Loading = styled(ActivityIndicator).attrs({
 export const RestaurantsScreen = ({ navigation }) => {
   const { isLoading, restaurants } = useContext(RestaurantsContext);
 
-  const navigateToDetail = () => {
-    navigation.navigate("RestaurantDetail");
-  };
-
   return (
     <SafeArea>
       {isLoading && (
@@ -47,7 +43,11 @@ export const RestaurantsScreen = ({ navigation }) => {
         data={restaurants}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity onPress={navigateToDetail}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("RestaurantDetail", { restaurant: item });
+              }}
+            >
               <Spacer position="bottom" size="large">
                 <RestaurantInfoCard restaurant={item} />
               </Spacer>
