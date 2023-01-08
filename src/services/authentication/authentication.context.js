@@ -13,10 +13,10 @@ export const AuthenticationContextProvider = ({ children }) => {
   const [error, setError] = useState([]);
 
   getAuth().onAuthStateChanged((u) => {
-    setIsLoading(false);
     if (u) {
-      setUser(user);
+      setUser(u);
     }
+    setIsLoading(false);
   });
 
   const onLogin = (email, password) => {
@@ -52,8 +52,9 @@ export const AuthenticationContextProvider = ({ children }) => {
   };
 
   const onLogout = () => {
-    setUser(null);
-    logoutRequest();
+    logoutRequest().then(() => {
+      setUser(null);
+    });
   };
 
   return (
