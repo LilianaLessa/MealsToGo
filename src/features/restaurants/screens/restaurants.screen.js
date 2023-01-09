@@ -10,6 +10,7 @@ import { SafeArea } from "../../../components/utility/safe-area.component";
 import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 import { FavouritesContext } from "../../../services/favourites/favourites.context";
 import { RestaurantList } from "../../../components/restaurant/restaurant-list.styles";
+import { FadeInView } from "../../../components/animations/fade.animation";
 
 const LoadingContainer = styled.View`
   position: absolute;
@@ -58,7 +59,9 @@ export const RestaurantsScreen = ({ navigation }) => {
               }}
             >
               <Spacer position="bottom" size="large">
-                <RestaurantInfoCard restaurant={item} />
+                <FadeInView duration={500}>
+                  <RestaurantInfoCard restaurant={item} />
+                </FadeInView>
               </Spacer>
             </TouchableOpacity>
           );
