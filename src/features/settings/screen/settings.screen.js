@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
-import { List, Avatar } from "react-native-paper";
+import { Avatar, List } from "react-native-paper";
 import styled from "styled-components/native";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { Text } from "../../../components/typography/text.component";
 import { UnsafeArea } from "../../../components/utility/safe-area.component";
+import { TouchableOpacity } from "react-native";
+import { UserProfileContext } from "../../../services/userProfile/user-profile.contex";
 
 const SettingsItem = styled(List.Item)`
   padding: ${(props) => props.theme.space[3]};
@@ -23,15 +25,33 @@ const AvatarContainer = styled.View`
 
 export const SettingsScreen = ({ navigation }) => {
   const { onLogout, user } = useContext(AuthenticationContext);
+  const { userProfilePictureUri } = useContext(UserProfileContext);
+  const [photo, setPhoto] = useState(null);
+
+  useEffect(() => {
+    setPhoto(userProfilePictureUri);
+  }, [userProfilePictureUri]);
 
   return (
     <UnsafeArea>
-      <AvatarContainer>
-        <Avatar.Icon size={180} icon="human" backgroundColor="#2182BD" />
-        <Spacer position="top" size="large">
-          <Text variant="label">{user.email}</Text>
-        </Spacer>
-      </AvatarContainer>
+      <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+        <AvatarContainer>
+          {!photo && (
+            <Avatar.Icon size={180} icon="human" backgroundColor="#2182BD" />
+          )}
+          {photo && (
+            <Avatar.Image
+              size={180}
+              source={{ uri: photo }}
+              backgroundColor="#2182BD"
+            />
+          )}
+          <Spacer position="top" size="large">
+            <Text variant="label">{user.email}</Text>
+          </Spacer>
+        </AvatarContainer>
+      </TouchableOpacity>
+
       <List.Section>
         <SettingsItem
           title="Favourites"
